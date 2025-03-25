@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "cypress-tags run --env TAGS='@regression' --browser chrome --headless"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "@badeball/cypress-cucumber-preprocessor": "^22.0.1",
     "@bahmutov/cypress-esbuild-preprocessor": "^2.2.4",
     "cypress": "^11.2.0",
+    "cypress-tags": "^1.2.2",
     "esbuild": "^0.17.11"
   },
   "cypress-cucumber-preprocessor": {

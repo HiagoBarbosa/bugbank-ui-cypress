@@ -1,0 +1,54 @@
+name: CI/CD Cypress Cucumber
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  schedule:
+    - cron: '0 8 * * 1-5'  # Executa de segunda a sexta às 08:00
+
+  workflow_dispatch:  # Permite disparar manualmente com parâmetros
+    inputs:
+      test_tag:
+        description: 'Tag do cenário a ser executado'
+        required: false
+        default: '@regression'
+      browser:
+        description: 'Navegador para rodar os testes'
+        required: false
+        default: 'chrome'
+
+jobs:
+  cypress-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout do código
+        uses: actions/checkout@v3
+
+      - name: 🔧 Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: 📦 Instalar dependências
+        run: npm install
+
+      - name: 🧪 Executar testes Cypress com Cucumber
+        env:
+          TEST_TAG: ${{ github.event.inputs.test_tag || '@regression' }}
+          BROWSER: ${{ github.event.inputs.browser || 'chrome' }}
+        run: |
+          npx cypress-tags run --env TAGS=$TEST_TAG --browser $BROWSER --headless
+
+      - name: 📊 Gerar relatório com Mochawesome
+        run: npm run report:generate  # Ajuste para o comando correto do seu setup
+
+      - name: 🚀 Publicar relatório no GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./cypress/reports  # Ajuste conforme o diretório dos seus relatórios

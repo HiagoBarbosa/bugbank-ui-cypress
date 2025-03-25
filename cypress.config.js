@@ -16,7 +16,6 @@ module.exports = defineConfig({
       return config;
     },
     specPattern: "cypress/e2e/features/fluxoBasico/*.feature",
-  
     baseUrl: "http://localhost:3000",
   },
 });
