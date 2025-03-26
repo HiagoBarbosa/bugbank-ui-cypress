@@ -45,10 +45,10 @@ jobs:
           npx cypress-tags run --env TAGS=$TEST_TAG --browser $BROWSER --headless
 
       - name: 📊 Gerar relatório com Mochawesome
-        run: npm run report:generate  # Ajuste para o comando correto do seu setup
+        run: npm run report:generate 
 
       - name: 🚀 Publicar relatório no GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./cypress/reports  # Ajuste conforme o diretório dos seus relatórios
+          publish_dir: ./cypress/reports 
