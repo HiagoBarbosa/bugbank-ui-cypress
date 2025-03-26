@@ -42,7 +42,7 @@ jobs:
           TEST_TAG: ${{ github.event.inputs.test_tag || '@regression' }}
           BROWSER: ${{ github.event.inputs.browser || 'chrome' }}
         run: |
-          npx cypress-tags run --env TAGS=$TEST_TAG --browser $BROWSER --headless
+          npx cypress run
 
       - name: 📊 Gerar relatório com Mochawesome
         run: npm run report:generate 
