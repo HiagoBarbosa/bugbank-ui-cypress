@@ -1,5 +1,5 @@
 Feature: Teste de Cadastro
-
+@smoke @regression
   Scenario: Cadastro de usuário com sucesso
     Given que estou na página de cadastro
     When preencho os campos obrigatórios com informações válidas

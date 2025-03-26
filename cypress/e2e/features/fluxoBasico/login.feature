@@ -1,6 +1,6 @@
-@smoke @regression
-Feature: Teste de Login
 
+Feature: Teste de Login
+  
   Scenario: Login bem-sucedido
     Given que estou na página de login
     When insiro usuário e senha corretos
